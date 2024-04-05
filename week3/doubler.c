@@ -21,8 +21,7 @@ int main()
         if (result == EOF)
             break;
         value = value * 2;
-        printf("%d ", value);
+        printf("%d\n", value);
     }
-    puts("");
     return EXIT_SUCCESS;
 }
