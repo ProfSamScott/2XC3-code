@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# This script demonstrates the trick of ending with a call to /bin/bash.
+# This starts a child bash process in which all your functions will be
+# available to you. It's a good way to test your functions.
+#
+# When you are done testing, use exit to get back to your original 
+# bash instance.
+#
+# Tip - use the ps command to show active processes. If you see more 
+# than one bash process running, you may need to exit.
+# 
+# IMPORTANT: remove /bin/bash when you no longer need it, otherwise
+# every time the script runs you're hogging resources by unnecessarily
+# starting a new bash process.
+#
+# Sam Scott, McMaster University, 2024
+
+###################################
+# Simple function to demonstrate
+# Arguments: $1 is any string
+# Outputs: Hello $1
+###################################
+function hwf () {
+    echo $@ # uncomment to see all parameters passed to hwf
+    echo "Hello $1"
+}
+
+# DEBUGGING - remove the lines below when not using
+export -f hwf   # set the hwf function to export to child processes
+/bin/bash       # start the child bash instance
+
