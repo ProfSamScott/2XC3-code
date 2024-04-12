@@ -1,0 +1,21 @@
+#!/bin/bash
+# This script demonstrates the use of getopts in a while loop.
+# 
+# getopts option_string var_name
+#
+# Sam Scott, McMaster University, 2024
+
+while getopts ab:c option; do
+    if [[ $option = a ]]; then
+        echo "option a found"
+    elif [[ $option = b ]]; then
+        echo "option b found with argument $OPTARG"
+    elif [[ $option = c ]]; then
+        echo "option c found"
+    else
+        echo "usage string goes here"
+        exit 1 # quit with error signal
+    fi
+done
+
+

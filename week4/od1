@@ -1,0 +1,29 @@
+#!/bin/bash
+# This script demonstrates the use of getopts in a raw way.
+# 
+# getopts option_string var_name
+#
+#   - the option_string defines the legal flags (see below)
+#
+#   - each call to getopts will identify a new option.
+#     - the option found will be loaded into the specified variable
+#     - if there is an argument that goes with the option, it will be in $OPTARG
+#
+#   - returns 0 (success) if it found an option, 1 (failure) if no more options found
+#
+# See od2 for a demonstration of how to use it in a while loop
+#
+# Sam Scott, McMaster University, 2024
+
+
+options=ab:cd: # legal options are -a -b arg -c -d arg 
+
+#options=:ab:cd # same as above, but with illegal flag error suppressed
+
+#options=xva  # legal options are -a -x -v
+
+for i in 1 2 3 4 5; do
+    getopts $options option
+    echo $? $option $OPTARG
+done
+
