@@ -38,6 +38,7 @@ test() {
     local STDERR=$4
 
     # CHECK RETURN VALUE
+    # all output sent to /dev/null
     $COMMAND >/dev/null 2>/dev/null
     local A_RETURN=$?
 
@@ -51,6 +52,7 @@ test() {
     fi
 
     # CHECK STDOUT
+    # STDERR sent to /dev/null otherwise it will show up in the console
     local A_STDOUT=$($COMMAND 2>/dev/null)
 
     if [[ "$STDOUT" != "$A_STDOUT" ]]; then
@@ -63,6 +65,9 @@ test() {
     fi
     
     # CHECK STDERR
+    # STDERR (2) redirected to STDOUT (1) using 2>&1 
+    # This ensures that STDERR appears in the command expansion
+    # STDOUT redirected to /dev/null
     local A_STDERR=$($COMMAND 2>&1 >/dev/null)
 
     if [[ "$STDERR" != "$A_STDERR" ]]; then
