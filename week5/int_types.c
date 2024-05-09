@@ -14,15 +14,15 @@
 #include <limits.h> // integer limit constants
 
 int main(void) {
-    printf("char:                   %2ld bytes, %20d to %20d\n",sizeof(char), CHAR_MIN, CHAR_MAX);
-    printf("short int:              %2ld bytes, %20d to %20d\n",sizeof(short int), SHRT_MIN, SHRT_MAX);
-    printf("unsigned short int:     %2ld bytes, %20d to %20u\n",sizeof(unsigned short int), 0, USHRT_MAX);
-    printf("int:                    %2ld bytes, %20d to %20d\n",sizeof( int), INT_MIN, INT_MAX);
-    printf("unsigned int:           %2ld bytes, %20d to %20u\n",sizeof(unsigned int), 0, UINT_MAX);
-    printf("long int:               %2ld bytes, %20ld to %20ld\n",sizeof(long int), LONG_MIN, LONG_MAX);
-    printf("unsigned long int:      %2ld bytes, %20d to %20lu\n",sizeof(unsigned long int), 0, ULONG_MAX);
-    printf("long long int:          %2ld bytes, %20lld to %20lld\n",sizeof(long long int), LLONG_MIN, LLONG_MAX);
-    printf("unsigned long long int: %2ld bytes, %20d to %20llu\n",sizeof(long long int), 0, ULLONG_MAX);
+    printf("char:               %2ld bytes, %20d to %20d\n",sizeof(char), CHAR_MIN, CHAR_MAX);
+    printf("short:              %2ld bytes, %20d to %20d\n",sizeof(short), SHRT_MIN, SHRT_MAX);
+    printf("unsigned short:     %2ld bytes, %20d to %20u\n",sizeof(unsigned short), 0, USHRT_MAX);
+    printf("int:                %2ld bytes, %20d to %20d\n",sizeof(int), INT_MIN, INT_MAX);
+    printf("unsigned:           %2ld bytes, %20d to %20u\n",sizeof(unsigned), 0, UINT_MAX);
+    printf("long:               %2ld bytes, %20ld to %20ld\n",sizeof(long), LONG_MIN, LONG_MAX);
+    printf("unsigned long:      %2ld bytes, %20d to %20lu\n",sizeof(unsigned long), 0, ULONG_MAX);
+    printf("long long:          %2ld bytes, %20lld to %20lld\n",sizeof(long long), LLONG_MIN, LLONG_MAX);
+    printf("unsigned long long: %2ld bytes, %20d to %20llu\n",sizeof(long long), 0, ULLONG_MAX);
 
     printf("\nCharacters as integers: %d %d %d\n",'A', 'A' + 10, 'A' * 'Z');
 
