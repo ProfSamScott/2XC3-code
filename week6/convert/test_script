@@ -1,26 +1,44 @@
 #!/bin/bash
 #
-# SFWRENG 2XC3: An integration testing framework for the convert utility.
-# 
-# Each call to the test function requires three file names as parameters: 
-#   input file
-#   expected std output file
-#   expected std error file
+# A simple framework for regression testing the convert (ctest) script
 #
-# It's assumed that if the expected error file is not empty, then error code 1 should be returned.
+# Returns the number of failed test cases.
 #
-# this program returns the number of failed test cases
+# Format of a test:
+#     test 'command' 'input file name' 'expected output file name' 'expected std error file name'
+#
+# Some example test cases are given. You should add more test cases.
+#
+# CAUTION: Uses temporary files named test_err.txt and test_out.txt
 # 
 # Sam Scott, McMaster University, 2024
 #
 declare -i tc=0
 declare -i fails=0
 
+############################################
+# Run a single test. Runs a given command 
+# to check the return value, stdout, and stderr
+#
+# GLOBALS: tc, fails
+# PARAMS: $1 = command
+#         $2 = input file name
+#         $3 = expected std output file name
+#         $4 = expected std error file name
+#
+# Assumes return value should be 0 if the
+# std error file is empty. Otherwise it 
+# should be 1.
+#
+# OUTPUTS: An pass/fail report showing the
+# difference between expected and actual
+# output on a failure (diff command)
+############################################
 test() {
     tc=tc+1
 
     local COMMAND=$1
-    local EX_INP=$2
+    local INP=$2
     local EX_OUT=$3
     local EX_ERR=$4 
 
@@ -28,7 +46,7 @@ test() {
     if [[ $(cat $EX_ERR) = "" ]]; then
         EX_RET=0
     fi
-    $COMMAND < $EX_INP > test_out.txt 2> test_err.txt
+    $COMMAND < $INP > test_out.txt 2> test_err.txt
     RET=$?
     if [[ $RET != $EX_RET ]]; then
         echo "TC $tc Failed"
@@ -61,8 +79,8 @@ test './ctest' 'inp1.txt' 'ex_out1.txt' 'empty.txt'
 test './ctest -b 2' 'inp2.txt' 'ex_out2.txt' 'empty.txt'
 test './ctest -a' 'empty.txt' 'empty.txt' 'usage.txt'
 
-# clean up and exit
-rm test_out.txt
-rm test_err.txt
+# clean up
+rm test_err.txt test_out.txt
 
+# return code
 exit $fails
