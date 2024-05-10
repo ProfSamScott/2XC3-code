@@ -1,0 +1,68 @@
+#!/bin/bash
+#
+# SFWRENG 2XC3: An integration testing framework for the convert utility.
+# 
+# Each call to the test function requires three file names as parameters: 
+#   input file
+#   expected std output file
+#   expected std error file
+#
+# It's assumed that if the expected error file is not empty, then error code 1 should be returned.
+#
+# this program returns the number of failed test cases
+# 
+# Sam Scott, McMaster University, 2024
+#
+declare -i tc=0
+declare -i fails=0
+
+test() {
+    tc=tc+1
+
+    local COMMAND=$1
+    local EX_INP=$2
+    local EX_OUT=$3
+    local EX_ERR=$4 
+
+    EX_RET=1
+    if [[ $(cat $EX_ERR) = "" ]]; then
+        EX_RET=0
+    fi
+    $COMMAND < $EX_INP > test_out.txt 2> test_err.txt
+    RET=$?
+    if [[ $RET != $EX_RET ]]; then
+        echo "TC $tc Failed"
+        echo "Returned $RET"
+        echo "-----------"
+        fails=$fails+1
+        return
+    fi
+    DIFF=$(diff test_out.txt $EX_OUT)
+    if [[ $DIFF != '' ]]; then
+        echo "TC $tc Failed Standard Output"
+        echo "$DIFF"
+        echo "-----------"
+        fails=$fails+1
+        return
+    fi
+    DIFF=$(diff test_err.txt $EX_ERR)
+    if [[ $DIFF != '' ]]; then
+        echo "TC $tc Failed Standard Error"
+        echo "$DIFF"
+        echo "-----------"
+        fails=$fails+1
+        return
+    fi
+
+    echo "TC $tc Passed"
+}
+
+test './ctest' 'inp1.txt' 'ex_out1.txt' 'empty.txt'
+test './ctest -b 2' 'inp2.txt' 'ex_out2.txt' 'empty.txt'
+test './ctest -a' 'empty.txt' 'empty.txt' 'usage.txt'
+
+# clean up and exit
+rm test_out.txt
+rm test_err.txt
+
+exit $fails
