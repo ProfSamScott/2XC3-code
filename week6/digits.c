@@ -1,6 +1,15 @@
+/* Starter code for Lab 6.1 Activity
+ *
+ * This file will not compile as is. You need to create the digits function.
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Main function. Runs test cases for the digits function.
+ * Exits with failure code on first test case fail.
+ * Otherwise exits with success.
+ */
 int main() {
     int min, max, sum;
     long n;
@@ -14,4 +23,6 @@ int main() {
         puts("failure");
         return EXIT_FAILURE;
     }
+
+    return EXIT_SUCCESS;
 }
