@@ -6,7 +6,7 @@
  *
  * */
 
-char *readline(char s[], int n) {
+int readline(char s[], int n) {
     int ch, i=0;
     while ((ch = getchar()) != '\n')
       if (i < n)
@@ -15,7 +15,7 @@ char *readline(char s[], int n) {
     return n;
 }
 
-char *readline() {
+char *readline2() {
     char *s = malloc(10001);
     int ch, i=0;
     while ((ch = getchar()) != '\n') 
@@ -27,10 +27,14 @@ char *readline() {
 }
 
 void main() {
-    char *a = readline();
+    char a[100];
+    readline(a, 99);
+    char *b = readline2();
     printf("%s\n", a);
+    printf("%s\n", b);
     char s[100], t[100];
-    scanf("%s",s);
+    scanf("%99s",s);
+    printf("%s %s\n", s, t);
     fgets(t, 7, stdin);
     printf("%s, %s\n",s, t);
 }
