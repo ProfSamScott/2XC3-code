@@ -1,14 +1,13 @@
 #!/bin/bash
 #
-# A simple framework for regression testing the bn scripts
+# A simple framework for testing the bn scripts
 #
 # Returns the number of failed test cases.
 #
 # Format of a test:
-#     test 'command' ret_value 'expected stdout' 'expected stderr'
+#     test 'command' expected_return_value 'stdin text' 'expected stdout' 'expected stderr'
 #
-# Some example test cases are given. You may need to adapt if you're using
-# a different output format. You should add more test cases.
+# Some example test cases are given. You should add more test cases.
 #
 # Sam Scott, McMaster University, 2024
 
@@ -24,8 +23,9 @@ declare -i fails=0
 # GLOBALS: tc, fails
 # PARAMS: $1 = command
 #         $2 = expected return value
-#         $3 = expected stdout
-#         $4 = expected stderr
+#         $3 = standard input text to send
+#         $4 = expected stdout
+#         $5 = expected stderr
 # RETURNS: 0 = success, 1 = bad return, 
 #          2 = bad stdout, 3 = bad stderr
 ############################################
@@ -34,12 +34,12 @@ test() {
 
     local COMMAND=$1
     local RETURN=$2
-    local STDOUT=$3
-    local STDERR=$4
+	local STDIN=$3
+    local STDOUT=$4
+    local STDERR=$5
 
     # CHECK RETURN VALUE
-    # all output sent to /dev/null
-    $COMMAND >/dev/null 2>/dev/null
+    $COMMAND <<< "$STDIN" >/dev/null 2>/dev/null
     local A_RETURN=$?
 
     if [[ "$A_RETURN" != "$RETURN" ]]; then
@@ -52,8 +52,7 @@ test() {
     fi
 
     # CHECK STDOUT
-    # STDERR sent to /dev/null otherwise it will show up in the console
-    local A_STDOUT=$($COMMAND 2>/dev/null)
+    local A_STDOUT=$($COMMAND <<< "$STDIN" 2>/dev/null)
 
     if [[ "$STDOUT" != "$A_STDOUT" ]]; then
         echo "Test $tc Failed"
@@ -65,10 +64,7 @@ test() {
     fi
     
     # CHECK STDERR
-    # STDERR (2) redirected to STDOUT (1) using 2>&1 
-    # This ensures that STDERR appears in the command expansion
-    # STDOUT redirected to /dev/null
-    local A_STDERR=$($COMMAND 2>&1 >/dev/null)
+    local A_STDERR=$($COMMAND <<< "$STDIN" 2>&1 >/dev/null)
 
     if [[ "$STDERR" != "$A_STDERR" ]]; then
         echo "Test $tc Failed"
@@ -89,19 +85,18 @@ test() {
 ##########################################
 
 # simple success
-test './bn -n Sam -y 2022 -a m' 0 '2022: Sam ranked 658 out of 14255 male names.' ''
+test './bn 2022 m' 0 'Sam' '2022: Sam ranked 658 out of 14255 male names.' ''
 
 # multi line success
-test './bn -n Sam -y 2022' 0 '2022: Sam ranked 6628 out of 17660 female names.
-2022: Sam ranked 658 out of 14255 male names.' ''
+test './bn 2022 B' 0 'Sam' '2022: Sam ranked 658 out of 14255 male names.
+2022: Sam ranked 6628 out of 17660 female names.' ''
 
-# multi line error case
-test './bn -n 123' 1 '' 'Badly formatted name list: 123
-bn [-n <name list>] [-y <year list>] [-a <b|f|m|B|F|M>] [-t <integer>]'
+# error case
+test './bn 2022 F' 3 'Sam2' '' 'Badly formatted name: Sam2'  
 
 # multi line error case #2
-test './bn -x' 1 '' './bn: illegal option -- x
-bn [-n <name list>] [-y <year list>] [-a <b|f|m|B|F|M>] [-t <integer>]'
+test './bn 1111 X' 2 '' '' 'Badly formatted assigned gender: X
+bn <year> <f|F|m|M|b|B>'
 
 # return code
 exit $fails
