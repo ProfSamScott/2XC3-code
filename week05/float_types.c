@@ -25,7 +25,7 @@ int main(void) {
     if (a == 0.3) {
         puts("Yay!");
     } else {
-        puts("\n0.1 + 0.1 + 0.1 does not equal 0.3!!!");
+        printf("\n0.1 + 0.1 + 0.1 = %.17f\n", a);
     }
 
     if (abs(a - 0.3) < DBL_EPSILON) {
