@@ -8,7 +8,7 @@ int main() {
 	int i2 = 2341.232;
 	char c1 = 123;
 	char c2 = 888;  	  // warning
-    int i3 = 'A';
+	int i3 = 'A';
 
 	printf("floats: %f %f\n", f1, f2);
 	printf("ints: %d %d %d\n", i1, i2, i3);
