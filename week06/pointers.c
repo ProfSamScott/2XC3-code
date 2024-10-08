@@ -6,18 +6,27 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-int process(int i, int j, int *s, int *m) {
-    *s = i - j;
-    *m = i * j;
-    return i+j;
-}
+int process (int, int, int *, int *);
 
-void main() {
+/* tests the process function */
+int main() {
     int sub, mult, add;
 
     add = process(10, 20, &sub, &mult);
 
-    printf("%d %d %d\n", add, sub, mult);
+    printf("Addition, Subtraction, Multiplication: %d %d %d\n", add, sub, mult);
+
+	return EXIT_SUCCESS;
 }
+
+/* compute the sum, difference, and product of i and j.
+ * *d = difference, *m = product
+ * returns sum
+ */
+int process(int i, int j, int *d, int *m) {
+    *d = i - j;
+    *m = i * j;
+    return i+j;
+}
+
