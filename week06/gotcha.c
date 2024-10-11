@@ -7,8 +7,9 @@
 /* code from the lecture slides */
 int main() {
 	int *x;
+	printf("Pointer: %p\n", x);
 	//*x = 10;
-	//printf("%d\n", *x);
+	//printf("Contents: %d\n", *x);
 
 	int a;
 	printf("Initial a Value: %d\n", a);
