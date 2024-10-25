@@ -1,3 +1,7 @@
+/* Array processing idioms (see text p. 162 for more)
+ *
+ * Sam Scott, McMaster, 2024
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
