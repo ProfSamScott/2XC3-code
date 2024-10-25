@@ -1,4 +1,5 @@
-/* An example of reading a variable length list of floats from standard input
+/* An example of reading a variable length list of floats 
+ * from standard input
  * 
  * Sam Scott, McMaster University, 2024
  */
@@ -21,6 +22,9 @@ int main() {
     puts("");
 }
 
+/* returns an array of floats from the user.
+ * Side-effect: *n is the size of the array
+ */
 float *readfs(int *n) {
     int size = 10;
     printf("Creating array of size %d\n", size);

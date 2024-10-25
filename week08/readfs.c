@@ -1,6 +1,8 @@
-/* An example of reading a variable length list of floats from standard input
+/* An example of reading a variable length list of floats 
+ * from standard input
  * 
- * The first item in stdin must be an integer representing the number of floats in the list
+ * The first item in stdin must be an integer representing 
+ * the number of floats in the list
  *
  * Sam Scott, McMaster University, 2024
  */
@@ -23,6 +25,9 @@ int main() {
     puts("");
 }
 
+/* return an array of floats from the user. 
+ * Side-effect: *n is the size of the array
+ */
 float *readfs(int *n) {
     scanf("%d", n);
 
