@@ -1,26 +1,29 @@
 /* An example of reading a variable length list of floats 
  * from standard input
  * 
- * The first item in stdin must be an integer representing 
+ * The first item in stdin must be a long representing 
  * the number of floats in the list
+ *
+ * If you enter a really big number, it won't be able to 
+ * allocate memory for you.
  *
  * Sam Scott, McMaster University, 2024
  */
 #include <stdio.h>
 #include <stdlib.h>
 
-float *readfs(int *);
+float *readfs(long *);
 
 int main() {
-    int n;
+    long n;
     float *input = readfs(&n);
 
-    if (n == -1) {
-        fprintf(stderr, "Couldn't allocate memory");
+    if (input == NULL) {
+        fprintf(stderr, "Couldn't allocate memory\n");
         return EXIT_FAILURE;
     }
 
-    for (int i = 0; i < n; i++) 
+    for (long i = 0; i < n; i++) 
         printf("%f ",input[i]);
     puts("");
 }
@@ -28,8 +31,8 @@ int main() {
 /* return an array of floats from the user. 
  * Side-effect: *n is the size of the array
  */
-float *readfs(int *n) {
-    scanf("%d", n);
+float *readfs(long *n) {
+    scanf("%ld", n);
 
     float *fs = malloc(*n * sizeof(float));
     if (fs == NULL) return NULL;

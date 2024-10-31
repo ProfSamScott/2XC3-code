@@ -1,4 +1,4 @@
-/* An example of how to correclty use malloc for a 2D array.
+/* An example of how to correctly use malloc for a 2D array.
  *
  * Sam Scott, McMaster University, 2024
  */
@@ -10,12 +10,14 @@
 
 void main() {
     // getting the type right! p is a pointer to an array of length C
+    // TODO - change to int * to see what happens
+    // TODO - recast to int (*)[C] to fix
     int (*p)[C] = malloc(R*C*sizeof(int));
     
     // initialize
     for (int r = 0; r < R; r++) {
         for (int c = 0; c < C; c++) {
-            p[r][c] = r*c;
+            p[r][c] = (r+1)*(c+1);
         }
     }
     // print

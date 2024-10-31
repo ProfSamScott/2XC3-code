@@ -26,7 +26,7 @@ int main() {
  * Side-effect: *n is the size of the array
  */
 float *readfs(int *n) {
-    int size = 10;
+    int size = 2;
     printf("Creating array of size %d\n", size);
 
     float *fs = malloc(size * sizeof(float));
@@ -38,7 +38,7 @@ float *readfs(int *n) {
         fs[*n] = next;
         *n += 1;
         if (*n >= size) {
-            size += 10; 
+            size *= 2; 
             printf("Increasing size to %d\n", size);
             fs = realloc(fs, size * sizeof(float));
             if (fs == NULL) 
