@@ -1,6 +1,0 @@
-This is a starter repo for the week 9 lecture.
-
-If you want to follow along...
-- cp -R merge_demo_starter "some path"
-  (Make sure the place you copy to is not part of any existing git repo.)
-- Then "mv git .git" and you have a starter repo for the Lecture 9 slides.
