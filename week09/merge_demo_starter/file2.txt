@@ -1,0 +1,5 @@
+Here is file 2
+
+Change to file 2.
+
+This is some content for file 2.
