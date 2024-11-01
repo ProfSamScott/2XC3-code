@@ -13,7 +13,7 @@ int main() {
     float *input = readfs(&n);
 
     if (input == NULL) {
-        fprintf(stderr, "Couldn't allocate memory");
+        fprintf(stderr, "Couldn't allocate memory\n");
         return EXIT_FAILURE;
     }
 
