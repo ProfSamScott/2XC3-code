@@ -14,10 +14,12 @@ void main() {
     printf("strings: %10s %10s %10s\n", s, t, u);
     printf("sizeof:  %10lu %10lu %10lu\n", sizeof(s), sizeof(t), sizeof(u));
     printf("strlen:  %10lu %10lu %10lu\n", strlen(s), strlen(t), strlen(u));
+    printf("\\0: %d\n",'\0');
 
     s[0] = 'H';
     //t[0] = 'G'; // segmentation fault (t is immutable)
     u[0] = 'H';
+	//u[strlen(u)] = '!'; // what will happen?
 
     printf("strings: %10s %10s %10s\n", s, t, u);
 }
