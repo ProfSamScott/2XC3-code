@@ -10,7 +10,7 @@ int readline(char s[], int n) {
     int ch, i=0;
     while ((ch = getchar()) != '\n') {
       s[i++] = ch;
-      if (i == n-1)
+      if (i == n)
         break;
 	}
 	
