@@ -15,7 +15,7 @@ void main(int argc, char argv[][100]) {
     char words[N][LENGTH]={"word", "what", "where", "why"}; // rectangular: wasteful 
     //char *words[] = {"word", "what", "where", "why"};     // ragged: immutable
 
-    puts("Printing array of strings context");
+    puts("Printing array of strings contents");
     for (int i=0; i<N; i++) 
         printf("%s ",words[i]);
     puts("");
