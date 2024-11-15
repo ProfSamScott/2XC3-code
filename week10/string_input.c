@@ -9,9 +9,9 @@
 int readline(char s[], int n) {
     int ch, i=0;
     while ((ch = getchar()) != '\n') {
-      if (i == n)
-        break;
       s[i++] = ch;
+      if (i == n-1)
+        break;
 	}
 	
     s[i] = '\0';
@@ -25,9 +25,9 @@ char *readline2() {
     char *s = malloc(10001);
     int ch, i=0;
     while ((ch = getchar()) != '\n') {
-      if (i == 10000) 
-        break;
       s[i++] = ch;
+      if (i == 10000)
+          break;
 	}
     s[i] = '\0';
     s = realloc(s, strlen(s)+1);

@@ -9,7 +9,7 @@
 #define N 4
 #define LENGTH 10
 
-void main(int argc, char argv[][100]) {
+void main(int argc, char *argv[]) {
 
     printf("%lu\n", sizeof(argv[0]));
     char words[N][LENGTH]={"word", "what", "where", "why"}; // rectangular: wasteful 
