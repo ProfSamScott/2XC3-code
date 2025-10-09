@@ -8,6 +8,7 @@
 #define N 5
 
 double find_largest(int n, double[n]);
+int sum(int rows, int cols, int array[rows][cols]); 
 
 int main() {
 
@@ -20,6 +21,14 @@ int main() {
     }
 
     printf("The largest number you entered is %.2lf.\n", find_largest(N, a));
+
+	int b[N][N]; // uninitialized
+	for (int r=0; r<N; r++) {
+		for (int c=0; c<N; c++) {
+			b[r][c] = 10;
+		}
+	}
+	printf("Sum of 5x5 array of 10's: %d\n", sum(N, N, b));
 }
 
 /* returns largest element of a[n] */
@@ -32,4 +41,13 @@ double find_largest(int n, double a[n]) {
         }
     }
     return largest;
+}
+
+/* sums up the elements in a 2d array */
+int sum(int rows, int cols, int array[rows][cols]) {
+    int total = 0;
+    for (int r=0; r<rows; r++)
+        for (int c=0; c<cols; c++)
+            total += array[r][c];
+    return total;
 }
