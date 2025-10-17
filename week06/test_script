@@ -95,7 +95,7 @@ test './bctest' 0 '-1 1' '11111111
 test './bctest -b 4 -f 1' 1 '-7 16' '1000' 'Error: Out of range [-7, 7].'  
 
 # multi line error case #2
-test './bctest -b 0' 1 '' '' 'Error: -b must range from 2 to 64.
+test './bctest -b 0' 1 '' '' 'Error: -b must range from 2 to 32.
 Usage: binconv [-b BITS] [-f 0|1|2] [-r START FINISH]'
 
 # return code
