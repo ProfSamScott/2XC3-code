@@ -1,4 +1,4 @@
-/* This file is to be used with Lab 9.2. Commenting is minimal
+/* This file is to be used with Lab 10.2. Commenting is minimal
  * so you can focus on the code. Sam Scott, McMaster, 2024.*/
 #include <stdio.h>
 #include <stdlib.h>
