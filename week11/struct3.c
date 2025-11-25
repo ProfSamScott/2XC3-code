@@ -22,7 +22,7 @@ void main() {
 
     printf("Name: ");
     fgets(s2.name, 99, stdin);
-    s2.name[strlen(s2.name)-1]='\0';
+    s2.name[strlen(s2.name)-1]='\0';   // replace \n. Assumes we read to the end of line.
     printf("Grade: ");
     scanf("%d", &s2.grade);
     printf("%s: %d\n",s2.name, s2.grade);
