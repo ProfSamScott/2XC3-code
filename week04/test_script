@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# A simple framework for testing the bn scripts
+# A simple framework for testing the tn scripts
 #
 # Returns the number of failed test cases.
 #
@@ -85,18 +85,36 @@ test() {
 ##########################################
 
 # simple success
-test './bn 1 m' 0 '1890' 'Top male name in 1890: John' ''
+test './tn' 0 'Ashlyn Krueger' "Women's Tennis 2025
+===================
+Ashlyn Krueger
+    21 wins, 22 losses" ''
 
-# multi line success
-test './bn 1 b' 0 '1890' 'Top male name in 1890: John
-Top female name in 1890: Mary' ''
+# multi line input
+test './tn M' 0 'Jakub Mensik
+Mikhail Kukushkin
+Sam Scott' "Men's Tennis 2025
+===================
+Jakub Mensik
+    34 wins, 21 losses
+Mikhail Kukushkin
+    0 wins, 2 losses
+Sam Scott
+    0 wins, 0 losses" ''
 
 # error case
-test './bn' 3 '18800' '' 'Badly formatted year: 18800'  
+test 'tn -t 1999 m w' 1 '' '' "Too many parameters
+Usage: tn [<-t>] [<year>] [<men's or women's: m|M|w|W>]"
 
-# multi line error case #2
-test './bn 100 X' 2 '' '' 'Bad second parameter: X
-Usage: bn [<num: 1 to 100>] [<assigned gender: f|F|m|M|b|B>]'
+# error case with standard output as well
+test './tn 1977 w' 3 'Elizabeth Vlotman
+Elizabeth
+Elizabeth7' "Women's Tennis 1977
+===================
+Elizabeth Vlotman
+    3 wins, 1 losses
+Elizabeth
+    0 wins, 0 losses" 'Badly formatted name: Elizabeth7'  
 
 # return code
 exit $fails
