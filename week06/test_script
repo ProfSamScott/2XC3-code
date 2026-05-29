@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# A simple framework for testing the binconv (bctest) scripts
+# A simple framework for testing the ictest scripts
 #
 # Returns the number of failed test cases.
 #
@@ -85,18 +85,18 @@ test() {
 ##########################################
 
 # simple success
-test './bctest' 0 "-1" "11111111" ''
+test './ictest' 0 "2342" "2342: Y" ''
 
 # multi line success
-test './bctest' 0 '-1 1' '11111111
-00000001' ''
+test './ictest' 0 '2342 2341' '2342: Y
+2341: N' ''
 
 # error case
-test './bctest -b 4 -f 1' 1 '-7 16' '1000' 'Error: Out of range [-7, 7].'  
+test './ictest -c P' 1 '2987892 radar' '2987892: Y' 'Input Error: Possibly caused by non-integer.'  
 
-# multi line error case #2
-test './bctest -b 0' 1 '' '' 'Error: -b must range from 2 to 32.
-Usage: binconv [-b BITS] [-f 0|1|2] [-r START FINISH]'
+# multi line error case 
+test './ictest -f 100 -s 1000' 1 '' '' 'Error: Bad range [1000, 100].
+Usage: ic [-c p|g|P|G] [-s START] [-f FINISH]'
 
 # return code
 exit $fails
